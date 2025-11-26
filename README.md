@@ -26,8 +26,23 @@ The final stage performs comprehensive variant calling on the realigned mtDNA se
 
 The pipeline leverages specialized in-house variant callers, and subsequently merges the variants detected from both alignments to generate a comprehensive variant set.
 
+## **Prerequisites**
+### **Software Dependencies**
+**Necessary software dependencies should be installed for running the pipeline are:**
+- GATK​ (Genome Analysis Toolkit) - Variant calling and processing 
+- SAMtools​ - BAM/CRAM file manipulation and indexing 
+- BWA​ (Burrows-Wheeler Aligner) - Sequence alignment 
+- MitoQuest​ - Custom mitochondrial DNA analysis tools ([Mitoquest](https://github.com/ShujiaHuang/mitoquest.git))
+- Snakemake​ - Pipeline management and execution 
+- Python 3​ - Pipeline execution and scripting
+
+### **Reference Files**
+#### **Modify the config.yaml file with your own file or sofware paths**
+Configuration software, parameters and reference file paths are specified in the **config.yaml** file that you need to edit with your own file paths before running. The pipeline utilizes the revised Cambridge Reference Sequence (rCRS, NC_012920.1) as the standard mitochondrial reference genome.
+
 ## **Quick Start**
-Firstly, put the input CRAM or BAM files—pre-aligned to both nuclear and mitochondrial genomes during whole-genome sequencing (WGS) analyses — into the input/cram/
+Firstly, need to **cp the config.yaml** and **run.all.smk** files to **the current working directory**;
+And, then put the input CRAM or BAM files—pre-aligned to both nuclear and mitochondrial genomes during whole-genome sequencing (WGS) analyses — into the **input/cram/**
 ```bash
 $ tree input/cram/
     input/cram/
@@ -41,18 +56,6 @@ $ tree input/cram/
 smk=./run.all.smk
 snakemake -c $threads -pk -s ${smk} 2> snakemake.err.txt
 ```
-
-## **Prerequisites**
-### **Software Dependencies**
-- GATK​ (Genome Analysis Toolkit) - Variant calling and processing 
-- SAMtools​ - BAM/CRAM file manipulation and indexing 
-- BWA​ (Burrows-Wheeler Aligner) - Sequence alignment 
-- MitoQuest​ - Custom mitochondrial DNA analysis tools
-- Snakemake​ - Pipeline management and execution 
-- Python 3​ - Pipeline execution and scripting
-
-### **Reference Files**
-Configuration parameters and reference file paths are specified in the **config.yaml** file that you need to edit with your own file paths before running. The pipeline utilizes the revised Cambridge Reference Sequence (rCRS, NC_012920.1) as the standard mitochondrial reference genome.
 
 ## **Methodological Considerations**
 The pipeline incorporates specific strategies to address challenges in mtDNA analysis:

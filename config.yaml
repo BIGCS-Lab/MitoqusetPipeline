@@ -18,26 +18,18 @@ tools:
 
 params:
     # the path to the reference directory
-    ref_dir: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/database/GRCh38_chrM_rCRS"
+    # MitoqusetPipeline_dir: "/PATH/TO/MitoqusetPipeline/"
+    MitoqusetPipeline_dir: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/USER/luozhenyu/test/mitoquest_calling/tools/MitoqusetPipeline"
+    
     # Human genome reference
-    human_ref: "~/BioDatahub/human_reference/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fa"
-    # Mitochondrial genome reference
-    mito_ref: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/database/GRCh38_chrM_rCRS/Homo_sapiens.GRCh38.chrM_rCRS.fa"
-    # Mitochondrial genome reference shifted by 8000 bp
-    mito_shifted_ref: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/database/GRCh38_chrM_rCRS/Homo_sapiens.GRCh38.chrM_rCRS.shifted_by_8000_bp.fa"
-    # Mitochondrial genome reference with decoy sequences
-    mito_refPlusDecoy: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_3/BIGDATA2/gzfezx_shhli_3/Project/20241223_BIGCS_mtDNA/01.basic_analysis/input/chrM_reference/Homo_sapiens.GRCh38.chrM_rCRS.decoy.fa"
-    # Mitochondrial genome reference shifted by 8000 bp with decoy sequences
-    mito_shifted_refPlusDecoy: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_3/BIGDATA2/gzfezx_shhli_3/Project/20241223_BIGCS_mtDNA/01.basic_analysis/input/chrM_reference/Homo_sapiens.GRCh38.chrM_rCRS.shifted_by_8000_bp.decoy.fa"
+    # You can download the reference genome for you WGS analysis, like GRCh38 from https://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.26/
+    human_ref: "~/BioDatahub/human_reference/GRCh38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fa" 
     # the platform of the sequencing data
     platform: "BGI-seq"
 
     # path to the snakemake file
-    smk_path: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/USER/luozhenyu/test/mitoquest_calling/tools/mitoquest_smk/smkfile"
-    # annotation database for mtDNA variants
-    annotation_dir: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/software/mitoquest/data"
-    # some custom scripts for the pipeline
-    scripts_dir: "/HOME/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/USER/luozhenyu/test/mitoquest_calling/tools/mitoquest_smk/tools"
+    # smk_path: "/PATH/TO/MitoqusetPipeline/" can be finded in this pipeline MitoqusetPipeline/smkfile directory
+    smk_path: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/USER/luozhenyu/test/mitoquest_calling/tools/mitoquest_smk"
     # path to the python
     python: "/HOME/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/miniconda3/envs/pacbio/bin/python"
     # the mapping quality cutoff for mitoquest

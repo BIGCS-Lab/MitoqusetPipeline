@@ -2,7 +2,7 @@
 
 rule extractMtDNAReads:
     input:
-        input_cram = "input/cram/{sampleName}.sorted.markdup.BQSR.cram"
+        input_cram = "input/cram/{sampleName}.cram"
     output:
         mtDNA_cram = "input/mtDNA_cram/{sampleName}.mtDNA.cram"
     params:

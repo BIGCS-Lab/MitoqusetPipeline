@@ -13,13 +13,13 @@ rule Align2RawRef:
     params:
         bwa = config['tools']['bwa'],
         samtools = config['tools']['samtools'],
-        ref = config['params']['mito_refPlusDecoy'],
+        ref = config['params']['MitoqusetPipeline_dir'],
         # readgroup = r'@RG\tID:{0}\tSM:{0}\tPL:{1}'.format(wildcards.sampleName,config['params']['platform'])
         readgroup = get_readgroup
     threads:
         config['threads']
     shell:
-        "{params.bwa} mem -Y -M -t {threads} -K 10000000 -R '{params.readgroup}' {params.ref} {input.r1} {input.r2} | {params.samtools} sort -@ {threads} --reference {params.ref} --output-fmt CRAM -o {output.mtDNA_cram} - && {params.samtools} index -@ {threads} {output.mtDNA_cram}"
+        "{params.bwa} mem -Y -M -t {threads} -K 10000000 -R '{params.readgroup}' {params.ref}/reference/Homo_sapiens.GRCh38.chrM_rCRS.decoy.fa {input.r1} {input.r2} | {params.samtools} sort -@ {threads} --reference {params.ref}/reference/Homo_sapiens.GRCh38.chrM_rCRS.decoy.fa --output-fmt CRAM -o {output.mtDNA_cram} - && {params.samtools} index -@ {threads} {output.mtDNA_cram}"
 
 rule Align2ShiftedRef:
     input:
@@ -31,9 +31,9 @@ rule Align2ShiftedRef:
     params:
         bwa = config['tools']['bwa'],
         samtools = config['tools']['samtools'],
-        ref = config['params']['mito_shifted_refPlusDecoy'],
+        ref = config['params']['MitoqusetPipeline_dir'],
         readgroup = get_readgroup
     threads:
         config['threads']
     shell:
-        "{params.bwa} mem -Y -M -t {threads} -K 10000000 -R '{params.readgroup}' {params.ref} {input.r1} {input.r2} | {params.samtools} sort -@ {threads} --reference {params.ref} --output-fmt CRAM -o {output.mtDNA_cram} - && {params.samtools} index -@ {threads} {output.mtDNA_cram}"
+        "{params.bwa} mem -Y -M -t {threads} -K 10000000 -R '{params.readgroup}' {params.ref}/reference/Homo_sapiens.GRCh38.chrM_rCRS.shifted_by_8000_bp.decoy.fa {input.r1} {input.r2} | {params.samtools} sort -@ {threads} --reference {params.ref}/reference/Homo_sapiens.GRCh38.chrM_rCRS.shifted_by_8000_bp.decoy.fa --output-fmt CRAM -o {output.mtDNA_cram} - && {params.samtools} index -@ {threads} {output.mtDNA_cram}"

@@ -17,7 +17,7 @@ rule create_inputfile_for_variant_calling:
 # Rule for SNV calling using mitoquest
 rule VarCalling_raw:
     input:
-        raw_ref_fa = config['params']['mito_ref'],
+        raw_ref_fa = config['params']['MitoqusetPipeline_dir'],
         raw_bam_list = "input/mtDNA_bam_list/raw_bam_list.txt"
     output:
         "output/01.mito_vcf/mito_raw_calling/{id}.non_control.vcf.gz".format(id = config['samples']['id']),
@@ -28,12 +28,12 @@ rule VarCalling_raw:
         mapQ = config['params']['mapQ'],
         baseQ = config['params']['baseQ']
     shell:
-        "{params.mitoquest} caller -t {threads} -f {input.raw_ref_fa} -r chrM:576-16024 --pairs-map-only -q {params.mapQ} -Q {params.baseQ} -b {input.raw_bam_list} -o {output}"
+        "{params.mitoquest} caller -t {threads} -f {input.raw_ref_fa}/reference/Homo_sapiens.GRCh38.chrM_rCRS.fa -r chrM:576-16024 --pairs-map-only -q {params.mapQ} -Q {params.baseQ} -b {input.raw_bam_list} -o {output}"
 
 # Rule for SNV calling using mitoquest
 rule VarCalling_shifted:
     input:
-        shifted_ref_fa = config['params']['mito_shifted_ref'],
+        shifted_ref_fa = config['params']['MitoqusetPipeline_dir'],
         shifted_bam_list = "input/mtDNA_bam_list/shifted_bam_list.txt"
     output:
         "output/01.mito_vcf/mito_shifted_calling/{id}.control.vcf.gz".format(id = config['samples']['id']),
@@ -44,7 +44,7 @@ rule VarCalling_shifted:
         mapQ = config['params']['mapQ'],
         baseQ = config['params']['baseQ']
     shell:
-        "{params.mitoquest} caller -t {threads} -f {input.shifted_ref_fa} -r chrM:8024-9145 --pairs-map-only -q {params.mapQ} -Q {params.baseQ} -b {input.shifted_bam_list} -o {output}"
+        "{params.mitoquest} caller -t {threads} -f {input.shifted_ref_fa}/reference/Homo_sapiens.GRCh38.chrM_rCRS.shifted_by_8000_bp.fa -r chrM:8024-9145 --pairs-map-only -q {params.mapQ} -Q {params.baseQ} -b {input.shifted_bam_list} -o {output}"
 
 
 # Rule for merging the two VCF files
@@ -55,15 +55,15 @@ rule mitoVCF_merging:
     output:
         "output/01.mito_vcf/{id}.samples.vcf"
     params:
-        scripts_dir = config['params']['scripts_dir'],
         python = config['params']['python'],
-        ref_dir = config['params']['ref_dir']
+        ref_dir = config['params']['MitoqusetPipeline_dir']
     shell:
         """
-        {params.python} {params.scripts_dir}/merge_cr_ncr_vcf.py -v1 {input.non_control_vcf} \
-                    -r1 {params.ref_dir}/Homo_sapiens.GRCh38.chrM_rCRS.non_control_region.interval_list \
+        {params.python} {params.ref_dir}/tools/merge_cr_ncr_vcf.py \
+                    -v1 {input.non_control_vcf} \
+                    -r1 {params.ref_dir}/reference/Homo_sapiens.GRCh38.chrM_rCRS.non_control_region.interval_list \
                     -v2 {input.control_vcf} \
-                    -r2 {params.ref_dir}/Homo_sapiens.GRCh38.chrM_rCRS.control_region.shifted_by_8000_bp.interval_list \
+                    -r2 {params.ref_dir}/reference/Homo_sapiens.GRCh38.chrM_rCRS.control_region.shifted_by_8000_bp.interval_list \
                     -o {output}
         """
 

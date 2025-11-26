@@ -46,7 +46,7 @@ def run_all_input(wildcards):
 rule run_all:
     input:
         run_all_input
-smk_path = config['params']['smk_path']
-include: smk_path+"/1.ExtractMtDNAReads.smk"
-include: smk_path+"/2.AlignmentMtDNA.smk"
-include: smk_path+"/3.VariantCalling.smk"
+smk_path = config['params']['MitoqusetPipeline_dir']
+include: smk_path+"/smkfile/1.ExtractMtDNAReads.smk"
+include: smk_path+"/smkfile/2.AlignmentMtDNA.smk"
+include: smk_path+"/smkfile/3.VariantCalling.smk"
