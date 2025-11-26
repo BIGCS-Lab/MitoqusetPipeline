@@ -27,9 +27,6 @@ params:
     # the platform of the sequencing data
     platform: "BGI-seq"
 
-    # path to the snakemake file
-    # smk_path: "/PATH/TO/MitoqusetPipeline/" can be finded in this pipeline MitoqusetPipeline/smkfile directory
-    smk_path: "/XYFS01/HDD_POOL/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/USER/luozhenyu/test/mitoquest_calling/tools/mitoquest_smk"
     # path to the python
     python: "/HOME/gzfezx_shhli/gzfezx_shhlixy_2/BIGDATA2/gzfezx_shhli_2/miniconda3/envs/pacbio/bin/python"
     # the mapping quality cutoff for mitoquest
