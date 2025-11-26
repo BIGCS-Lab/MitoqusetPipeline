@@ -57,6 +57,9 @@ smk=./run.all.smk
 snakemake -c $threads -pk -s ${smk} 2> snakemake.err.txt
 ```
 
+The pipeline will automatically detect the input files and start the analysis. The output files will be stored in the **output/** directory.
+And the final results will be stored in the **\$current_working_directory/output/01.mito_vcf/\$id.samples.vcf** directory.
+
 ## **Methodological Considerations**
 The pipeline incorporates specific strategies to address challenges in mtDNA analysis:
 - Circular genome handling: Double alignment strategy prevents artifacts at linearization breakpoints 
